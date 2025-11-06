@@ -1,0 +1,14 @@
+[project]
+name = "strava"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "stravalib>=2.4",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.1.0",
+]
