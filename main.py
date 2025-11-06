@@ -1,6 +1,7 @@
 import requests
 import os
 from dotenv import load_dotenv
+import pandas as pd
 
 load_dotenv()
 
@@ -32,26 +33,26 @@ def get_activities(access_token, limit=10):
         headers={'Authorization': f'Bearer {access_token}'},
         params={'per_page': limit, 'page': 1}
     )
-    
+
     print(f"Rate limit: {response.headers.get('X-RateLimit-Limit')}")
     print(f"Remaining: {response.headers.get('X-RateLimit-Usage')}")
-    
+
     if response.status_code != 200:
         print(f"Error: {response.text}")
         return []
-        
+
     return response.json()
 
 def main():
     access_token = get_access_token()
     if not access_token:
         return
-        
+
     activities = get_activities(access_token, limit=10)
     print(f"\nDownloaded {len(activities)} activities")
-    
-    for activity in activities:
-        print(f"{activity['name']} - {activity['type']} - {activity['distance']}m")
+
+    df = pd.DataFrame(activities)
+    print("\n", df[['name', 'type', 'distance', 'moving_time', 'start_date_local']])
 
 if __name__ == "__main__":
     main()
