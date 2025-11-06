@@ -5,12 +5,9 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "pandas>=2.3.3",
     "python-dotenv>=1.2.1",
     "requests>=2.32.5",
     "stravalib>=2.4",
-]
-
-[dependency-groups]
-dev = [
-    "ipykernel>=7.1.0",
+    "flask>=3.1.0",
 ]
